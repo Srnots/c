@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pusheen x Roblox: Cute Game Picks</title>
+    <title></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://thumbnails.roblox.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -24,8 +25,10 @@
             color: var(--choco);
             font-family: 'Quicksand', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
             background: var(--cream) center/cover fixed no-repeat;
-            /* Pusheen pastel wallpaper (soft hearts) */
-            background-image: url('https://images.wallpaperscraft.com/image/single/pusheen_cat_pattern_art_119115_1920x1080.jpg');
+            /* Pusheen background (user provided) with a backup */
+            background-image:
+                url('https://wallpapersok.com/images/hd/kawaii-hd-kissy-pusheen-lezr6j0zv8o4p47d.jpg'),
+                url('https://images.wallpaperscraft.com/image/single/pusheen_cat_pattern_art_119115_1920x1080.jpg');
         }
 
         .backdrop-tint {
@@ -37,47 +40,7 @@
             pointer-events: none;
         }
 
-        header {
-            padding: 28px 20px 10px;
-            text-align: center;
-        }
-        .title {
-            font-family: 'Fredoka', system-ui, sans-serif;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            font-size: clamp(28px, 4.5vw, 44px);
-            margin: 0 0 8px 0;
-            text-shadow: 0 6px 14px var(--shadow);
-        }
-        .subtitle {
-            margin: 0;
-            font-weight: 600;
-            color: #7a6e6c;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            padding: 16px 20px 6px;
-        }
-        .pill-btn {
-            position: relative;
-            border: 0;
-            padding: 10px 16px 10px 44px;
-            border-radius: 999px;
-            background: white;
-            color: var(--choco);
-            font-weight: 700;
-            box-shadow: 0 10px 24px var(--shadow);
-            cursor: pointer;
-            transition: transform 200ms ease, box-shadow 200ms ease;
-        }
-        .pill-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px var(--shadow); }
-        .pill-btn:active { transform: translateY(0); }
-        .pill-btn .emoji {
-            position: absolute; left: 12px; top: 8px; font-size: 20px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.12));
-        }
+        /* header removed per request */
 
         main { padding: 22px clamp(14px, 4vw, 24px) 56px; }
         .grid {
@@ -137,7 +100,7 @@
             transition: transform 180ms ease, box-shadow 180ms ease;
         }
         .play-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px var(--shadow); }
-        .play-btn .hint { opacity: 0.7; font-weight: 700; font-size: 12px; }
+        .play-btn .hint { display: none; }
 
         /* Pusheen floating sticker */
         .sticker {
@@ -156,8 +119,25 @@
             filter: blur(0.2px);
         }
 
-        /* hide obvious links: rely on button + image click */
+        /* hide obvious links: entire card clickable */
         .link-hidden { position: absolute; inset: 0; z-index: 1; }
+
+        /* cute sprinkles: pusheen emojis (true colors, minimal glow) */
+        .sprinkle {
+            position: fixed;
+            pointer-events: none;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.14));
+            animation: sprinkle-fall linear forwards;
+        }
+        .sprinkle-emoji {
+            width: 42px; height: 42px; display: block; object-fit: contain;
+            filter: none;
+        }
+        @keyframes sprinkle-fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0 }
+            10% { opacity: 1 }
+            100% { transform: translateY(110vh) rotate(20deg); opacity: 0 }
+        }
 
         footer { text-align: center; padding: 30px 16px 60px; color: #7a6e6c; font-weight: 700; }
     </style>
@@ -165,72 +145,47 @@
 <body>
     <div class="backdrop-tint"></div>
 
-    <header>
-        <h1 class="title">Pusheen's Cozy Roblox Picks</h1>
-        <p class="subtitle">Three cute adventures, wrapped in pastel vibes</p>
-        <div class="controls">
-            <button id="muteToggle" class="pill-btn" aria-pressed="false">
-                <span class="emoji">🔊</span>
-                Sound: On
-            </button>
-            <button id="sparkle" class="pill-btn">
-                <span class="emoji">✨</span>
-                Sprinkle Glitter
-            </button>
-        </div>
-    </header>
+    
 
     <main>
         <section class="grid">
             <!-- Murder Mystery 2 -->
             <article class="card hearts" data-place="142823291" data-title="Murder Mystery 2" data-url="https://www.roblox.com/games/142823291/Murder-Mystery-2">
                 <a class="link-hidden" href="https://www.roblox.com/games/142823291/Murder-Mystery-2" target="_blank" rel="noopener"></a>
-                <div class="thumb-wrap"><img class="thumb" alt="Murder Mystery 2 thumbnail"></div>
+                <div class="thumb-wrap"><img class="thumb" alt="Murder Mystery 2 thumbnail" src="https://static.wikia.nocookie.net/siivagunner/images/b/b2/Murder_Mystery_2.jpg/revision/latest/scale-to-width-down/1200?cb=20230902193612"></div>
                 <div class="thumb-overlay"></div>
                 <div class="content">
                     <div class="game-title">Murder Mystery 2</div>
                     <p class="desc">Play detective or be sneaky! A classic whodunnit with friends.</p>
-                    <a class="play-btn" href="https://www.roblox.com/games/142823291/Murder-Mystery-2" target="_blank" rel="noopener">
-                        <span>Play now</span>
-                        <span class="hint">opens Roblox</span>
-                    </a>
                 </div>
             </article>
 
             <!-- Be My Camera (2 Player Obby) -->
             <article class="card hearts" data-place="95205997597502" data-title="Be My Camera [2 Player Obby]" data-url="https://www.roblox.com/games/95205997597502/Be-My-Camera-2-Player-Obby">
                 <a class="link-hidden" href="https://www.roblox.com/games/95205997597502/Be-My-Camera-2-Player-Obby" target="_blank" rel="noopener"></a>
-                <div class="thumb-wrap"><img class="thumb" alt="Be My Camera thumbnail"></div>
+                <div class="thumb-wrap"><img class="thumb" alt="Be My Camera thumbnail" src="https://tr.rbxcdn.com/180DAY-277c82d34681c34368d3caa61ddde2ee/768/432/Image/Webp/noFilter"></div>
                 <div class="thumb-overlay"></div>
                 <div class="content">
                     <div class="game-title">Be My Camera · 2 Player Obby</div>
                     <p class="desc">Team up and pose through pastel obstacles. Say cheese!</p>
-                    <a class="play-btn" href="https://www.roblox.com/games/95205997597502/Be-My-Camera-2-Player-Obby" target="_blank" rel="noopener">
-                        <span>Play now</span>
-                        <span class="hint">opens Roblox</span>
-                    </a>
                 </div>
             </article>
 
             <!-- Steal a Pusheen -->
             <article class="card hearts" data-place="81928715194157" data-title="Steal a Pusheen" data-url="https://www.roblox.com/games/81928715194157/Steal-a-Pusheen">
                 <a class="link-hidden" href="https://www.roblox.com/games/81928715194157/Steal-a-Pusheen" target="_blank" rel="noopener"></a>
-                <div class="thumb-wrap"><img class="thumb" alt="Steal a Pusheen thumbnail"></div>
+                <div class="thumb-wrap"><img class="thumb" alt="Steal a Pusheen thumbnail" src="https://tr.rbxcdn.com/180DAY-07ef3d7f9de910af20e0fdba4a3dea88/768/432/Image/Webp/noFilter"></div>
                 <div class="thumb-overlay"></div>
                 <div class="content">
                     <div class="game-title">Steal a Pusheen</div>
                     <p class="desc">A mischievous adventure starring our favorite chonky kitty.</p>
-                    <a class="play-btn" href="https://www.roblox.com/games/81928715194157/Steal-a-Pusheen" target="_blank" rel="noopener">
-                        <span>Play now</span>
-                        <span class="hint">opens Roblox</span>
-                    </a>
                 </div>
             </article>
         </section>
     </main>
 
-    <!-- Floating Pusheen sticker (transparent PNG) -->
-    <img class="sticker" alt="Pusheen waving" src="https://static.wikia.nocookie.net/pusheen/images/1/1a/Pusheen_Wave.png" />
+    <!-- Floating Pusheen sticker (transparent PNG) with fallbacks -->
+    <img class="sticker" id="pusheenSticker" alt="Pusheen waving" src="https://pngimg.com/uploads/pusheen/pusheen_PNG28.png" />
 
     <audio id="hoverSfx" preload="auto">
         <source src="https://cdn.pixabay.com/audio/2022/03/01/audio_7d3b7d1df9.mp3" type="audio/mpeg">
@@ -243,95 +198,130 @@
         const cards = Array.from(document.querySelectorAll('.card'));
         const hoverSfx = document.getElementById('hoverSfx');
         const clickSfx = document.getElementById('clickSfx');
-        const muteToggle = document.getElementById('muteToggle');
-        let isMuted = false;
 
-        function setMuted(m) {
-            isMuted = !!m;
-            hoverSfx.muted = isMuted; clickSfx.muted = isMuted;
-            muteToggle.setAttribute('aria-pressed', (!isMuted).toString());
-            muteToggle.innerHTML = `<span class="emoji">${isMuted ? '🔇' : '🔊'}</span>${isMuted ? 'Sound: Off' : 'Sound: On'}`;
+        // Always-on cute sprinkles (★, ✧, ♡)
+        // Pusheen emoji image set (transparent PNGs)
+        const SPRITES = [
+            'https://pngimg.com/uploads/pusheen/pusheen_PNG28.png',
+            'https://pngimg.com/uploads/pusheen/pusheen_PNG63.png',
+            'https://pngimg.com/uploads/pusheen/pusheen_PNG94.png',
+            'https://pngimg.com/uploads/pusheen/pusheen_PNG25.png',
+            'https://pngimg.com/uploads/pusheen/pusheen_PNG69.png'
+        ];
+        const SPRITE_FALLBACK = 'https://pngimg.com/uploads/pusheen/pusheen_PNG28.png';
+        function spawnSprinkle() {
+            const s = document.createElement('div');
+            s.className = 'sprinkle';
+            const img = document.createElement('img');
+            img.className = 'sprinkle-emoji';
+            img.src = SPRITES[Math.floor(Math.random() * SPRITES.length)];
+            img.alt = 'Pusheen';
+            img.addEventListener('error', () => { img.src = SPRITE_FALLBACK; });
+            s.appendChild(img);
+            const x = Math.random() * 100;
+            const delay = Math.random() * 0.8 + 0.1;
+            const duration = Math.random() * 6 + 6;
+            s.style.left = x + 'vw';
+            s.style.animationDuration = duration + 's';
+            s.style.animationDelay = delay + 's';
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), (duration + delay) * 1000);
         }
+        // slower spawn to avoid spam
+        setInterval(spawnSprinkle, 600);
 
-        muteToggle.addEventListener('click', () => setMuted(!isMuted));
-        setMuted(false);
+        // Pusheen sticker fallbacks
+        (function() {
+            const sticker = document.getElementById('pusheenSticker');
+            const sources = [
+                'https://pngimg.com/uploads/pusheen/pusheen_PNG28.png',
+                'https://pngimg.com/uploads/pusheen/pusheen_PNG63.png',
+                'https://pngimg.com/uploads/pusheen/pusheen_PNG94.png'
+            ];
+            let idx = 0;
+            sticker.addEventListener('error', () => {
+                idx = (idx + 1);
+                if (idx < sources.length) sticker.src = sources[idx];
+            });
+        })();
 
-        // Gentle glitter sprinkle
-        document.getElementById('sparkle').addEventListener('click', () => {
-            const sparkle = document.createElement('div');
-            sparkle.style.position = 'fixed';
-            sparkle.style.inset = '0';
-            sparkle.style.pointerEvents = 'none';
-            sparkle.style.background = 'radial-gradient(circle at 10% 20%, rgba(255,203,235,.45) 0 25px, transparent 26px),\
-                                        radial-gradient(circle at 80% 10%, rgba(197,251,231,.45) 0 18px, transparent 19px),\
-                                        radial-gradient(circle at 60% 60%, rgba(206,192,255,.35) 0 22px, transparent 23px)';
-            sparkle.style.animation = 'fadeOut 900ms ease forwards';
-            document.body.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 1000);
-        });
-
-        // Create keyframes for sparkle fade
-        const style = document.createElement('style');
-        style.textContent = `@keyframes fadeOut { from { opacity: 1 } to { opacity: 0 } }`;
-        document.head.appendChild(style);
-
-        // Fetch thumbnails using Roblox thumbnails API by place IDs (direct place icon)
-        // If universe icons are preferred, convert placeId->universeId via games.roblox.com APIs.
-        async function loadThumbnails() {
-            const placeIds = cards.map(c => c.dataset.place).join(',');
+        // Roblox thumbnails: refresh via official API for latest icons (fallback if direct fails)
+        let thumbnailsFetchedOnce = false;
+        async function refreshThumbnails() {
+            if (thumbnailsFetchedOnce) return;
+            thumbnailsFetchedOnce = true;
             try {
-                // Attempt universe icons when possible
-                const universeIds = await Promise.all(cards.map(async c => {
-                    const placeId = c.dataset.place;
-                    try {
-                        const res = await fetch(`https://apis.roblox.com/universes/v1/places/${placeId}/universe`);
-                        if (!res.ok) throw new Error('universe lookup failed');
-                        const data = await res.json();
-                        return data.universeId;
-                    } catch (e) {
-                        return null;
-                    }
-                }));
-
-                const validUniverseIds = universeIds.filter(Boolean);
-                if (validUniverseIds.length === cards.length) {
-                    const url = `https://thumbnails.roblox.com/v1/games/icons?universeIds=${validUniverseIds.join(',')}&size=768x432&format=Png&isCircular=false`;
-                    const res = await fetch(url);
-                    const json = await res.json();
-                    if (json && json.data) {
-                        json.data.forEach((item, idx) => {
-                            const img = cards[idx].querySelector('.thumb');
-                            img.src = item.imageUrl;
-                        });
-                    }
-                } else {
-                    // Fallback: place icons
-                    const url = `https://thumbnails.roblox.com/v1/places/gameicons?placeIds=${placeIds}&size=768x432&format=Png&isCircular=false`;
-                    const res = await fetch(url);
-                    const json = await res.json();
-                    if (json && json.data) {
-                        json.data.forEach((item, idx) => {
-                            const img = cards[idx].querySelector('.thumb');
-                            img.src = item.imageUrl;
-                        });
-                    }
-                }
-            } catch (err) {
-                // graceful degrade: use roblox generic thumbnail if needed
+                const ids = cards.map(c => c.dataset.place).join(',');
+                const url = `https://thumbnails.roblox.com/v1/places/gameicons?placeIds=${ids}&size=768x432&format=Png&isCircular=false`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('thumbs fetch failed');
+                const json = await res.json();
+                if (!json || !json.data) return;
+                const byId = new Map(json.data.map(d => [String(d.targetId), d]));
                 cards.forEach(card => {
                     const img = card.querySelector('.thumb');
-                    img.src = 'https://static.rbxcdn.com/images/Place-Icon.png';
+                    const d = byId.get(card.dataset.place);
+                    if (d && d.imageUrl) img.src = d.imageUrl;
                 });
+            } catch (e) {
+                // final fallback set handled by per-image error handler
             }
         }
 
-        // SFX hooks
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => { if (!isMuted) { hoverSfx.currentTime = 0; hoverSfx.play().catch(()=>{}); } });
-            card.addEventListener('click', () => { if (!isMuted) { clickSfx.currentTime = 0; clickSfx.play().catch(()=>{}); } });
+        // Click sparkle burst + SFX anywhere on page
+        function burstAt(x, y) {
+            for (let i = 0; i < 12; i++) {
+                const p = document.createElement('div');
+                p.className = 'sprinkle';
+                const img = document.createElement('img');
+                img.className = 'sprinkle-emoji';
+                img.src = SPRITES[i % SPRITES.length];
+                img.alt = 'Pusheen';
+                img.addEventListener('error', () => { img.src = SPRITE_FALLBACK; });
+                p.appendChild(img);
+                p.style.left = x + 'px';
+                p.style.top = y + 'px';
+                const angle = (Math.PI * 2 * i) / 12;
+                const distance = 84 + Math.random() * 44;
+                p.style.transition = 'transform 650ms ease, opacity 720ms ease';
+                p.style.opacity = '1';
+                document.body.appendChild(p);
+                requestAnimationFrame(() => {
+                    p.style.transform = `translate(${Math.cos(angle)*distance}px, ${Math.sin(angle)*distance}px)`;
+                    p.style.opacity = '0';
+                });
+                setTimeout(() => p.remove(), 900);
+            }
+        }
+        document.addEventListener('click', (e) => {
+            try { clickSfx.currentTime = 0; clickSfx.play(); } catch(_) {}
+            burstAt(e.clientX, e.clientY);
         });
 
-        loadThumbnails();
+        // SFX hooks (always on upon interaction)
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                try { hoverSfx.currentTime = 0; hoverSfx.play(); } catch(e) {}
+            });
+            card.addEventListener('click', () => {
+                try { clickSfx.currentTime = 0; clickSfx.play(); } catch(e) {}
+            });
+            // Ensure thumbnails have a fallback if any fail
+            const img = card.querySelector('.thumb');
+            let retried = false;
+            img.addEventListener('error', () => {
+                if (!retried) {
+                    retried = true;
+                    refreshThumbnails();
+                } else {
+                    img.src = 'https://static.rbxcdn.com/images/Place-Icon.png';
+                }
+            });
+        });
+
+        // Also kick off a proactive refresh to ensure latest thumbnails
+        refreshThumbnails();
     </script>
 </body>
 </html>
+
