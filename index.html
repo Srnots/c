@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pusheen x Roblox: Cute Game Picks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ffbfd7;
+            --rose: #ff9dbe;
+            --lilac: #c9b7ff;
+            --mint: #b3f1da;
+            --cream: #fff6f6;
+            --choco: #6b5a57;
+            --shadow: rgba(31, 27, 27, 0.12);
+        }
+
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            color: var(--choco);
+            font-family: 'Quicksand', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+            background: var(--cream) center/cover fixed no-repeat;
+            /* Pusheen pastel wallpaper (soft hearts) */
+            background-image: url('https://images.wallpaperscraft.com/image/single/pusheen_cat_pattern_art_119115_1920x1080.jpg');
+        }
+
+        .backdrop-tint {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(1200px 800px at 10% 0%, rgba(255, 195, 220, 0.35), transparent),
+                        radial-gradient(900px 700px at 100% 20%, rgba(186, 255, 230, 0.25), transparent),
+                        linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.25));
+            pointer-events: none;
+        }
+
+        header {
+            padding: 28px 20px 10px;
+            text-align: center;
+        }
+        .title {
+            font-family: 'Fredoka', system-ui, sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            font-size: clamp(28px, 4.5vw, 44px);
+            margin: 0 0 8px 0;
+            text-shadow: 0 6px 14px var(--shadow);
+        }
+        .subtitle {
+            margin: 0;
+            font-weight: 600;
+            color: #7a6e6c;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 20px 6px;
+        }
+        .pill-btn {
+            position: relative;
+            border: 0;
+            padding: 10px 16px 10px 44px;
+            border-radius: 999px;
+            background: white;
+            color: var(--choco);
+            font-weight: 700;
+            box-shadow: 0 10px 24px var(--shadow);
+            cursor: pointer;
+            transition: transform 200ms ease, box-shadow 200ms ease;
+        }
+        .pill-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px var(--shadow); }
+        .pill-btn:active { transform: translateY(0); }
+        .pill-btn .emoji {
+            position: absolute; left: 12px; top: 8px; font-size: 20px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.12));
+        }
+
+        main { padding: 22px clamp(14px, 4vw, 24px) 56px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: clamp(14px, 3vw, 24px);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            grid-column: span 12;
+            background: rgba(255, 255, 255, 0.88);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 18px 40px var(--shadow);
+            position: relative;
+            transition: transform 280ms ease, box-shadow 280ms ease;
+            isolation: isolate;
+        }
+        @media (min-width: 660px) { .card { grid-column: span 6; } }
+        @media (min-width: 980px) { .card { grid-column: span 4; } }
+
+        .card::before {
+            content: "";
+            position: absolute; inset: -1px;
+            background: linear-gradient(135deg, rgba(255, 205, 230, 0.8), rgba(201, 183, 255, 0.8));
+            filter: blur(24px);
+            opacity: 0; transition: opacity 280ms ease; z-index: -1;
+        }
+        .card:hover { transform: translateY(-6px) rotate(-0.2deg); box-shadow: 0 24px 56px var(--shadow); }
+        .card:hover::before { opacity: 0.9; }
+
+        .thumb-wrap { aspect-ratio: 16/9; background: #eee; position: relative; overflow: hidden; }
+        .thumb { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(1.08) contrast(1.02); }
+        .thumb-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.25) 100%);
+        }
+
+        .content { padding: 14px 14px 18px; }
+        .game-title { font-weight: 800; font-size: 18px; margin: 4px 0 6px; letter-spacing: 0.2px; }
+        .desc { margin: 0; color: #6f6361; font-weight: 600; }
+
+        .play-btn {
+            margin-top: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: #4a3f3d;
+            font-weight: 800;
+            background: linear-gradient(180deg, #ffe3ee, #ffd1e5);
+            box-shadow: 0 10px 20px var(--shadow);
+            transition: transform 180ms ease, box-shadow 180ms ease;
+        }
+        .play-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 28px var(--shadow); }
+        .play-btn .hint { opacity: 0.7; font-weight: 700; font-size: 12px; }
+
+        /* Pusheen floating sticker */
+        .sticker {
+            position: fixed; right: 14px; bottom: 14px; width: clamp(90px, 15vw, 150px); pointer-events: none; filter: drop-shadow(0 10px 16px var(--shadow));
+            animation: bob 3.5s ease-in-out infinite;
+        }
+        @keyframes bob { 0%,100%{ transform: translateY(0)} 50%{ transform: translateY(-10px)} }
+
+        /* confetti hearts on hover */
+        .card:hover .hearts::after {
+            content: ""; position: absolute; right: 12px; top: 8px; width: 10px; height: 10px; background: var(--rose); border-radius: 2px; transform: rotate(45deg);
+            box-shadow:
+                12px 6px 0 0 var(--pink),
+                -8px 10px 0 0 var(--mint),
+                0 14px 0 0 var(--lilac);
+            filter: blur(0.2px);
+        }
+
+        /* hide obvious links: rely on button + image click */
+        .link-hidden { position: absolute; inset: 0; z-index: 1; }
+
+        footer { text-align: center; padding: 30px 16px 60px; color: #7a6e6c; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="backdrop-tint"></div>
+
+    <header>
+        <h1 class="title">Pusheen's Cozy Roblox Picks</h1>
+        <p class="subtitle">Three cute adventures, wrapped in pastel vibes</p>
+        <div class="controls">
+            <button id="muteToggle" class="pill-btn" aria-pressed="false">
+                <span class="emoji">🔊</span>
+                Sound: On
+            </button>
+            <button id="sparkle" class="pill-btn">
+                <span class="emoji">✨</span>
+                Sprinkle Glitter
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="grid">
+            <!-- Murder Mystery 2 -->
+            <article class="card hearts" data-place="142823291" data-title="Murder Mystery 2" data-url="https://www.roblox.com/games/142823291/Murder-Mystery-2">
+                <a class="link-hidden" href="https://www.roblox.com/games/142823291/Murder-Mystery-2" target="_blank" rel="noopener"></a>
+                <div class="thumb-wrap"><img class="thumb" alt="Murder Mystery 2 thumbnail"></div>
+                <div class="thumb-overlay"></div>
+                <div class="content">
+                    <div class="game-title">Murder Mystery 2</div>
+                    <p class="desc">Play detective or be sneaky! A classic whodunnit with friends.</p>
+                    <a class="play-btn" href="https://www.roblox.com/games/142823291/Murder-Mystery-2" target="_blank" rel="noopener">
+                        <span>Play now</span>
+                        <span class="hint">opens Roblox</span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Be My Camera (2 Player Obby) -->
+            <article class="card hearts" data-place="95205997597502" data-title="Be My Camera [2 Player Obby]" data-url="https://www.roblox.com/games/95205997597502/Be-My-Camera-2-Player-Obby">
+                <a class="link-hidden" href="https://www.roblox.com/games/95205997597502/Be-My-Camera-2-Player-Obby" target="_blank" rel="noopener"></a>
+                <div class="thumb-wrap"><img class="thumb" alt="Be My Camera thumbnail"></div>
+                <div class="thumb-overlay"></div>
+                <div class="content">
+                    <div class="game-title">Be My Camera · 2 Player Obby</div>
+                    <p class="desc">Team up and pose through pastel obstacles. Say cheese!</p>
+                    <a class="play-btn" href="https://www.roblox.com/games/95205997597502/Be-My-Camera-2-Player-Obby" target="_blank" rel="noopener">
+                        <span>Play now</span>
+                        <span class="hint">opens Roblox</span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Steal a Pusheen -->
+            <article class="card hearts" data-place="81928715194157" data-title="Steal a Pusheen" data-url="https://www.roblox.com/games/81928715194157/Steal-a-Pusheen">
+                <a class="link-hidden" href="https://www.roblox.com/games/81928715194157/Steal-a-Pusheen" target="_blank" rel="noopener"></a>
+                <div class="thumb-wrap"><img class="thumb" alt="Steal a Pusheen thumbnail"></div>
+                <div class="thumb-overlay"></div>
+                <div class="content">
+                    <div class="game-title">Steal a Pusheen</div>
+                    <p class="desc">A mischievous adventure starring our favorite chonky kitty.</p>
+                    <a class="play-btn" href="https://www.roblox.com/games/81928715194157/Steal-a-Pusheen" target="_blank" rel="noopener">
+                        <span>Play now</span>
+                        <span class="hint">opens Roblox</span>
+                    </a>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- Floating Pusheen sticker (transparent PNG) -->
+    <img class="sticker" alt="Pusheen waving" src="https://static.wikia.nocookie.net/pusheen/images/1/1a/Pusheen_Wave.png" />
+
+    <audio id="hoverSfx" preload="auto">
+        <source src="https://cdn.pixabay.com/audio/2022/03/01/audio_7d3b7d1df9.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="clickSfx" preload="auto">
+        <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_5fb2d5a06f.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const cards = Array.from(document.querySelectorAll('.card'));
+        const hoverSfx = document.getElementById('hoverSfx');
+        const clickSfx = document.getElementById('clickSfx');
+        const muteToggle = document.getElementById('muteToggle');
+        let isMuted = false;
+
+        function setMuted(m) {
+            isMuted = !!m;
+            hoverSfx.muted = isMuted; clickSfx.muted = isMuted;
+            muteToggle.setAttribute('aria-pressed', (!isMuted).toString());
+            muteToggle.innerHTML = `<span class="emoji">${isMuted ? '🔇' : '🔊'}</span>${isMuted ? 'Sound: Off' : 'Sound: On'}`;
+        }
+
+        muteToggle.addEventListener('click', () => setMuted(!isMuted));
+        setMuted(false);
+
+        // Gentle glitter sprinkle
+        document.getElementById('sparkle').addEventListener('click', () => {
+            const sparkle = document.createElement('div');
+            sparkle.style.position = 'fixed';
+            sparkle.style.inset = '0';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.background = 'radial-gradient(circle at 10% 20%, rgba(255,203,235,.45) 0 25px, transparent 26px),\
+                                        radial-gradient(circle at 80% 10%, rgba(197,251,231,.45) 0 18px, transparent 19px),\
+                                        radial-gradient(circle at 60% 60%, rgba(206,192,255,.35) 0 22px, transparent 23px)';
+            sparkle.style.animation = 'fadeOut 900ms ease forwards';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1000);
+        });
+
+        // Create keyframes for sparkle fade
+        const style = document.createElement('style');
+        style.textContent = `@keyframes fadeOut { from { opacity: 1 } to { opacity: 0 } }`;
+        document.head.appendChild(style);
+
+        // Fetch thumbnails using Roblox thumbnails API by place IDs (direct place icon)
+        // If universe icons are preferred, convert placeId->universeId via games.roblox.com APIs.
+        async function loadThumbnails() {
+            const placeIds = cards.map(c => c.dataset.place).join(',');
+            try {
+                // Attempt universe icons when possible
+                const universeIds = await Promise.all(cards.map(async c => {
+                    const placeId = c.dataset.place;
+                    try {
+                        const res = await fetch(`https://apis.roblox.com/universes/v1/places/${placeId}/universe`);
+                        if (!res.ok) throw new Error('universe lookup failed');
+                        const data = await res.json();
+                        return data.universeId;
+                    } catch (e) {
+                        return null;
+                    }
+                }));
+
+                const validUniverseIds = universeIds.filter(Boolean);
+                if (validUniverseIds.length === cards.length) {
+                    const url = `https://thumbnails.roblox.com/v1/games/icons?universeIds=${validUniverseIds.join(',')}&size=768x432&format=Png&isCircular=false`;
+                    const res = await fetch(url);
+                    const json = await res.json();
+                    if (json && json.data) {
+                        json.data.forEach((item, idx) => {
+                            const img = cards[idx].querySelector('.thumb');
+                            img.src = item.imageUrl;
+                        });
+                    }
+                } else {
+                    // Fallback: place icons
+                    const url = `https://thumbnails.roblox.com/v1/places/gameicons?placeIds=${placeIds}&size=768x432&format=Png&isCircular=false`;
+                    const res = await fetch(url);
+                    const json = await res.json();
+                    if (json && json.data) {
+                        json.data.forEach((item, idx) => {
+                            const img = cards[idx].querySelector('.thumb');
+                            img.src = item.imageUrl;
+                        });
+                    }
+                }
+            } catch (err) {
+                // graceful degrade: use roblox generic thumbnail if needed
+                cards.forEach(card => {
+                    const img = card.querySelector('.thumb');
+                    img.src = 'https://static.rbxcdn.com/images/Place-Icon.png';
+                });
+            }
+        }
+
+        // SFX hooks
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => { if (!isMuted) { hoverSfx.currentTime = 0; hoverSfx.play().catch(()=>{}); } });
+            card.addEventListener('click', () => { if (!isMuted) { clickSfx.currentTime = 0; clickSfx.play().catch(()=>{}); } });
+        });
+
+        loadThumbnails();
+    </script>
+</body>
+</html>
+
